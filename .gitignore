@@ -18,3 +18,8 @@ local.properties
 build
 
 .DS_Store
+bazel-bin
+bazel-failsafe
+bazel-out
+bazel-testlogs
+bazel-gson
