@@ -15,6 +15,13 @@ maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 # Run `REPIN=1 bazel run @maven//:pin` to repin
 maven.install(
     artifacts = [
+        "com.google.errorprone:error_prone_annotations:2.41.0",
+        "junit:junit:4.13.2",
+        "com.google.truth:truth:1.4.2",
+        "com.google.guava:guava-testlib:33.4.8-jre",
+        "com.google.guava:guava:33.4.8-jre",
+        "com.fasterxml.jackson.core:jackson-databind:2.19.2",
+        "com.google.caliper:caliper:1.0-beta-3",
     ],
     lock_file = "//:maven_install.json",
 )
