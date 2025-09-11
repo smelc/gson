@@ -28,3 +28,7 @@ jobs:
 
       - name: Build with Bazel
         run: bazel build --config=java${{ matrix.java-version}} //...
+
+      - name: Test with Bazel
+        if: matrix.java-version != 11 # Tests do not work on Java 11
+        run: bazel test --config=java${{ matrix.java-version}} //...

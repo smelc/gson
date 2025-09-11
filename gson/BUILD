@@ -21,3 +21,17 @@ java_library(
         "@maven//:com_google_errorprone_error_prone_annotations",
     ],
 )
+
+java_test(
+    name = "tests",
+    srcs = glob(["src/test/java/com/google/gson/**/*.java"]),
+    test_class = "com.google.gson.GsonTest",
+    deps = [
+        ":gson",
+        ":gson_build_config",
+        "@maven//:junit_junit",
+        "@maven//:com_google_truth_truth",
+        "@maven//:com_google_guava_guava",
+        "@maven//:com_google_guava_guava_testlib",
+    ],
+)
