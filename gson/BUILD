@@ -22,9 +22,20 @@ java_library(
     ],
 )
 
+config_setting(
+    name = "java11",
+    values = {"java_language_version": "11"},
+)
+
 java_test(
     name = "tests",
-    srcs = glob(["src/test/java/com/google/gson/**/*.java"]),
+    srcs = select({
+        ":java11": glob(
+            ["src/test/java/com/google/gson/**/*.java"],
+            exclude = ["src/test/java/com/google/gson/**/Java17*.java"],
+        ),
+        "//conditions:default": glob(["src/test/java/com/google/gson/**/*.java"]),
+    }),
     test_class = "com.google.gson.GsonTest",
     deps = [
         ":gson",
