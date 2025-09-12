@@ -27,6 +27,7 @@ maven.install(
         "com.fasterxml.jackson.core:jackson-databind:2.19.2",
         "com.google.caliper:caliper:1.0-beta-3",
         "com.google.protobuf:protobuf-java:4.31.1",
+        "javax.annotation:jsr250-api:1.0",
     ],
     lock_file = "//:maven_install.json",
 )
