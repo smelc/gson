@@ -15,12 +15,26 @@ bazel_dep(name = "rules_jvm_external", version = "6.8")
 bazel_dep(name = "rules_proto", version = "6.0.0")
 bazel_dep(name = "protobuf", version = "32.0")
 
+bazel_dep(name = "rules_graalvm", version = "0.11.1")
+gvm = use_extension("@rules_graalvm//:extensions.bzl", "graalvm")
+
+gvm.graalvm(
+    name = "graalvm",
+    version = "17.0.8",  # pass graalvm or specific jdk version supported by gvm
+    distribution = "oracle",  # `oracle`, `ce`, or `community`
+    java_version = "17",  # TODO, README from --java_language_version
+)
+use_repo(gvm, "graalvm")
+register_toolchains("@graalvm//:jvm")
+register_toolchains("@graalvm//:sdk")
+
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 # Run `REPIN=1 bazel run @maven//:pin` to repin
 maven.install(
     artifacts = [
         "com.google.errorprone:error_prone_annotations:2.41.0",
         "junit:junit:4.13.2",
+        "org.junit.jupiter:junit-jupiter:5.13.4",
         "com.google.truth:truth:1.4.2",
         "com.google.guava:guava-testlib:33.4.8-jre",
         "com.google.guava:guava:33.4.8-jre",
