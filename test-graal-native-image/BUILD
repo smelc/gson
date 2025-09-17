@@ -13,27 +13,12 @@ TEST_DEPS = [
     ]
 
 java_test(
-    name = "reflection_test",
-    srcs = ["src/test/java/com/google/gson/native_test/ReflectionTest.java"],
+    name = "tests",
+    srcs = select({
+            ":java17": ["src/test/java/com/google/gson/native_test/ReflectionTest.java",
+                        "src/test/java/com/google/gson/native_test/Java17RecordReflectionTest.java"],
+            "//conditions:default": ["src/test/java/com/google/gson/native_test/ReflectionTest.java"]
+    }),
     test_class = "com.google.gson.native_test.ReflectionTest",
     deps = TEST_DEPS
-)
-
-java_test(
-    name = "java17_record_reflection_test",
-    srcs = ["src/test/java/com/google/gson/native_test/Java17RecordReflectionTest.java"],
-    test_class = "com.google.gson.native_test.Java17RecordReflectionTest",
-    deps = TEST_DEPS
-)
-
-test_suite(
-    name = "tests",
-    tests = select({
-        ":java17": [
-            ":reflection_test",
-            ":java17_record_reflection_test",
-        ],
-        "//conditions:default": [":reflection_test"],
-    }),
-
 )
