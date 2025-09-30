@@ -11,6 +11,7 @@ jobs:
 
     strategy:
       matrix:
+        fail-fast: false
         java-version: [11, 17, 21]
 
     steps:
